@@ -366,6 +366,7 @@ DEFAULT_CONFIG = {
         "skin": "default",
         "tool_progress_command": False,  # Enable /verbose command in messaging gateway
         "tool_preview_length": 0,  # Max chars for tool call previews (0 = no limit, show full paths/commands)
+        "delete_progress_messages": False,  # Auto-delete progress messages after final response
     },
 
     # Privacy settings
