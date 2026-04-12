@@ -815,6 +815,7 @@ class TelegramAdapter(BasePlatformAdapter):
             
             message_ids = []
             thread_id = metadata.get("thread_id") if metadata else None
+            silent = metadata.get("silent", False) if metadata else False
             
             try:
                 from telegram.error import NetworkError as _NetErr
@@ -847,6 +848,7 @@ class TelegramAdapter(BasePlatformAdapter):
                                 parse_mode=ParseMode.MARKDOWN_V2,
                                 reply_to_message_id=reply_to_id,
                                 message_thread_id=effective_thread_id,
+                                disable_notification=silent,
                             )
                         except Exception as md_error:
                             # Markdown parsing failed, try plain text
@@ -859,6 +861,7 @@ class TelegramAdapter(BasePlatformAdapter):
                                     parse_mode=None,
                                     reply_to_message_id=reply_to_id,
                                     message_thread_id=effective_thread_id,
+                                    disable_notification=silent,
                                 )
                             else:
                                 raise

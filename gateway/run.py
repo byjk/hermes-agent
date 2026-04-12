@@ -8126,7 +8126,11 @@ class GatewayRunner:
             _progress_thread_id = source.thread_id or event_message_id
         else:
             _progress_thread_id = source.thread_id
-        _progress_metadata = {"thread_id": _progress_thread_id} if _progress_thread_id else None
+        # Silent mode: tool progress messages are sent without notification
+        # so the user isn't spammed with sounds/vibrations for every tool call.
+        _progress_metadata = {"silent": True}
+        if _progress_thread_id:
+            _progress_metadata["thread_id"] = _progress_thread_id
 
         async def send_progress_messages():
             if not progress_queue:
