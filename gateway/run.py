@@ -8128,7 +8128,8 @@ class GatewayRunner:
             _progress_thread_id = source.thread_id
         # Silent mode: tool progress messages are sent without notification
         # so the user isn't spammed with sounds/vibrations for every tool call.
-        _progress_metadata = {"silent": True}
+        # Link preview disabled to keep progress messages compact.
+        _progress_metadata = {"silent": True, "no_preview": True}
         if _progress_thread_id:
             _progress_metadata["thread_id"] = _progress_thread_id
 
